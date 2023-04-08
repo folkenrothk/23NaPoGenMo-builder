@@ -13,37 +13,19 @@ import (
 
 type File struct {
 	XMLName xml.Name `xml:"rdf"`
-	Rdf     []Obj    `xml:"metadata"`
+	Rdf     []Obj    `xml:"data"`
 }
 
 type Obj struct {
-	XMLName    xml.Name `xml:"metadata"`
-	Identifier string   `xml:"identifier"`
-	Title      string   `xml:"title"`
-	Date       string   `xml:"date"`
+	XMLName xml.Name `xml:"data"`
 
-	Image string `xml:Image`
-	Desc  string `xml:"description"`
+	Id      string `xml:"id"`
+	Title   string `xml:"title"`
+	Content string `xml:"content"`
+	Img     string `xml:"img"`
 
-	Type        string `xml:"type"`
-	Format      string `xml:"format"`
-	PhysicalMed string `xml:"PhysicalMedium"`
-	Location    string `xml:"Location"`
-
-	Subject  string `xml:"subject"`
-	Coverage string `xml:"coverage"`
-	Spatial  string `xml:"spatial"`
-	Temporal string `xml:"temporal"`
-
-	Source      string `xml:"source"`
-	Creator     string `xml:"creator"`
-	Contributor string `xml:"contributor"`
-	Publisher   string `xml:"publisher"`
-
-	Rights   string `xml:"rights"`
-	Language string `xml:"language"`
-
-	Relation string `xml:"relation"`
+	Creator string `xml:"creator"`
+	Method  string `xml:"method"`
 }
 
 var fileArray []string
@@ -77,7 +59,7 @@ func main() {
 
 		for m := 0; m < len(item.Rdf); m++ {
 			//fmt.Println("ITEM: " + item.Rdf[m].Title)
-			webpageName := "./theme/pages/" + item.Rdf[m].Identifier + ".html"
+			webpageName := "./theme/pages/" + item.Rdf[m].Id + ".html"
 			stachio(item.Rdf[m], webpageName)
 		}
 	}
